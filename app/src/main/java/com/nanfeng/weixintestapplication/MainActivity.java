@@ -1,36 +1,36 @@
 package com.nanfeng.weixintestapplication;
 
-import android.os.Environment;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-    private WebView mWebView;
-    private String filepaht = Environment.getExternalStorageDirectory().getAbsolutePath();
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+    private ListView mListView;
+    private GameListAdapter mGameListAdapter;
+    private List<GameBean> mList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mWebView = (WebView) findViewById(R.id.webview);
-        WebSettings webSettings = mWebView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setBuiltInZoomControls(true);
-        webSettings.setSupportZoom(true);
-        Log.e("IOException", "filepaht:" + filepaht);
-//            copyBigDataToSD(filepaht);
-//        mWebView.loadUrl("file://" + filepaht + "/bdsjm/index.html");//SD卡文件
-        mWebView.loadUrl("file:///android_asset/bdsjm/index.html");//Asset文件夹文件
+        mListView = (ListView) findViewById(R.id.listview);
+        mList = HtmlAnalysis.analysisMenuList(AssetsHelper.getFromAssetsText(this, "game/index3.html"));
+        mGameListAdapter = new GameListAdapter(this, mList);
+        mListView.setAdapter(mGameListAdapter);
+        mListView.setOnItemClickListener(this);
     }
 
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Intent intent = new Intent(this, HtmlGameActivity.class);
+        intent.putExtra(HtmlGameActivity.GAME_PATH_KEY, mGameListAdapter.getItem(i).filePath);
+        startActivity(intent);
+    }
 }
