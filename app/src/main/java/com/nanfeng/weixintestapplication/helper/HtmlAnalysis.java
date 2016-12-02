@@ -1,6 +1,8 @@
-package com.nanfeng.weixintestapplication;
+package com.nanfeng.weixintestapplication.helper;
 
 import android.util.Log;
+
+import com.nanfeng.weixintestapplication.bean.GameBean;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

@@ -1,4 +1,4 @@
-package com.nanfeng.weixintestapplication;
+package com.nanfeng.weixintestapplication.bean;
 
 
 /**

@@ -9,6 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.nanfeng.weixintestapplication.bean.GameBean;
+import com.nanfeng.weixintestapplication.helper.AssetsHelper;
+
 import java.util.List;
 
 /**

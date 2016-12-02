@@ -1,4 +1,4 @@
-package com.nanfeng.weixintestapplication;
+package com.nanfeng.weixintestapplication.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.nanfeng.weixintestapplication.helper.AssetsHelper;
+import com.nanfeng.weixintestapplication.bean.GameBean;
+import com.nanfeng.weixintestapplication.GameListAdapter;
+import com.nanfeng.weixintestapplication.helper.HtmlAnalysis;
+import com.nanfeng.weixintestapplication.R;
 
 import java.util.ArrayList;
 import java.util.List;
