@@ -12,12 +12,15 @@ import android.webkit.WebViewClient;
 import com.nanfeng.weixintestapplication.R;
 import com.nanfeng.weixintestapplication.helper.AssetsHelper;
 
+import java.io.File;
 import java.util.List;
 
 public class HtmlGameActivity extends AppCompatActivity {
     private WebView mWebView;
     public static final String GAME_PATH_KEY = "GAME_PATH_KEY";
     private String mFilePath = "file:///android_asset/";
+    private final String HTML = "index.html";
+    private final String HTM = "index.htm";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +46,13 @@ public class HtmlGameActivity extends AppCompatActivity {
     private void initData() {
         String path = this.getIntent().getStringExtra(GAME_PATH_KEY);
         List<String> menulist = AssetsHelper.getListAssets(this, path);
-        String gamePath = "";
+        String gamePath = mFilePath + path + File.separator;
         if (null != menulist && menulist.size() > 0) {
-            if (menulist.contains("index.html")) {
-                gamePath = mFilePath + path + "/index.html";
-            } else if (menulist.contains("index.htm")) {
-                gamePath = mFilePath + path + "/index.htm";
+            if (menulist.contains(HTML)) {
+                gamePath += HTML;
+            } else if (menulist.contains(HTM)) {
+                gamePath += HTM;
             }
-        }
-        if (null != gamePath && gamePath.length() > 0) {
             Log.e("mFilePath", "mFilePath:" + gamePath);
             mWebView.loadUrl(gamePath);
         } else {
